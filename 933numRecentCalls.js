@@ -1,6 +1,7 @@
 var RecentCounter = function() {
     
     this.pingArr=[];
+    this.currLastRelInd=0;
 
 };
 
@@ -14,10 +15,10 @@ var RecentCounter = function() {
 
 RecentCounter.prototype.ping = function(t) {
     this.pingArr.push(t);
-    while(this.pingArr[0]<t-3000){
-        this.pingArr.shift();
+    while(this.pingArr[this.currLastRelInd]<t-3000){
+        this.currLastRelInd++;
     }
-    return this.pingArr.length
+    return this.pingArr.length-this.currLastRelInd;
 };
 
 /** 
